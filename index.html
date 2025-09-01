@@ -29,6 +29,10 @@
     }
     .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
+    /* Desktop and Mobile visibility */
+    .desktop-only { display: block; }
+    .mobile-only { display: none; }
+
     /* Header */
     header { position: sticky; top:0; z-index: 50; }
     .navwrap {
@@ -56,12 +60,12 @@
     .cta:hover { box-shadow: 0 0 0 6px var(--ring); }
 
     /* Hero */
-    .hero { position: relative; min-height: 72vh; display:grid; align-items: end; }
+    .hero { position: relative; min-height: 300px; display:grid; align-items: end; }
     .media { position:absolute; inset:0; overflow:hidden; }
-    .media img { width:100%; height:100%; object-fit: cover; filter: saturate(1.02) contrast(1.02) brightness(.9); }
-    .media::after { content:""; position:absolute; inset:0; background:
+    .media img { width:100%; }
+    /* .media::after { content:""; position:absolute; inset:0; background:
       radial-gradient(70% 55% at 25% 35%, rgba(0,0,0,.0), rgba(0,0,0,.35) 45%, rgba(0,0,0,.78) 75%),
-      linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65)); }
+      linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65)); } */
 
     .headline { position:relative; padding: 110px 0 80px; }
     h1 { font: 900 clamp(32px, 6vw, 56px)/1.02 Outfit, Inter; letter-spacing:.02em; margin:0 0 10px; }
@@ -69,6 +73,9 @@
     .accent { color: #ffffff; }
     .kicker { font: 800 14px/1.25 Outfit, Inter; letter-spacing:.16em; text-transform: uppercase; color: var(--brand); margin-bottom: 10px; }
     .subline { font: 700 clamp(14px, 2.2vw, 18px)/1.4 Outfit, Inter; color: var(--text); opacity:.95; }
+
+    /* Responsive image for the shark */
+    .container > img { max-width: 100%; height: auto; display: block; margin: 0 auto; padding-top: 24px; padding-bottom: 24px;}
 
     .progress { height: 4px; width: 180px; border-radius: 999px; background: rgba(255,255,255,.08); overflow:hidden; margin-top: 18px; }
     .progress > i { display:block; height:100%; width: 38%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); }
@@ -85,6 +92,18 @@
       nav.open { display:block; }
       nav ul { flex-direction:column; align-items:stretch; gap:6px; }
       nav a.active::after { display:none; }
+      .desktop-only { display: none; } /* Hide desktop-only elements on mobile */
+      .mobile-only { display: block; } /* Show mobile-only elements on mobile */
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: clamp(28px, 8vw, 48px); }
+      .display { font-size: clamp(24px, 7vw, 40px); }
+      .subline { font-size: clamp(12px, 3vw, 16px); }
+      .container { padding: 0 16px; } /* Adjust container padding for smaller screens */
+      .headline { padding: 80px 0 60px; } /* Adjust hero headline padding */
+      section.container { padding: 32px 16px 0 !important; } /* Adjust section padding */
+      #contact.container { padding: 40px 16px 60px !important; } /* Adjust contact section padding */
+      .hero { padding: 0 20px; } /* Add padding to hero section on mobile */
     }
   </style>
 </head>
@@ -111,11 +130,11 @@
   </header>
 
   <main id="home" class="hero">
-    <div class="media" aria-hidden="true">
+    <div class="media desktop-only" aria-hidden="true">
       <!-- Use your banner image from brand kit -->
       <img src="blacktip-site-starter/assets/hero-ocean-banner.png" alt="Underwater sunlight beams" />
     </div>
-    <div class="container headline">
+    <div class="container headline mobile-only">
       <div class="kicker">Blacktip Solutions</div>
       <h1 class="display accent">PROFESSIONAL SERVICES & EXECUTIVE CONSULTING</h1>
       <p class="subline">Precision. Speed. Focused Execution.</p>
@@ -130,9 +149,9 @@
   <section id="contact" class="container" style="padding: 60px 24px 96px;">
     <div style="background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px 20px;">
       <h2 style="margin:0 0 10px; font: 800 26px/1.15 Outfit, Inter;">Get in touch</h2>
-      <p style="margin:0 0 16px; color:var(--muted); max-width:70ch;">Want a quick scoping call or want to send an RFP? Email <a style="color:var(--brand)" href="mailto:hello@blacktipops.com">hello@blacktipops.com</a> and we’ll respond promptly.</p>
+      <p style="margin:0 0 16px; color:var(--muted); max-width:70ch;">Want a quick scoping call or want to send an RFP? Email <a style="color:var(--brand)" href="mailto:corporate@blacktip-ops.com">corporate@blacktip-ops.com</a> and we’ll respond promptly.</p>
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="cta" href="mailto:hello@blacktipops.com" style="--c: var(--brand-2); background:linear-gradient(180deg,#eafff9,#c7fff0);">Email us</a>
+        <a class="cta" href="mailto:corporate@blacktip-ops.com" style="--c: var(--brand-2); background:linear-gradient(180deg,#eafff9,#c7fff0);">Email us</a>
         <a class="cta" href="#" style="background:#eaf8ff; --c: var(--brand);">Download capability statement</a>
       </div>
     </div>
