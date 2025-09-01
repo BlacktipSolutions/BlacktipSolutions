@@ -1,32 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Technology Solutions</title>
-    <link rel="stylesheet" href=" <header>
-        <div class="logo">
-            <span class="input">input</span>
-            <span class="technology-solutions">Technology Solutions</span>
-        </div>
-        <nav>
-            <ul>
-                <li>#Home</a></li>
-                <li>#Capabilities &#9662;</a></li>
-                <li>#Staffing &#9662;</a></li>
-                <li><aompany &#9662;</a></li>
-                <li><button class="contact-us">Contact Us</button></li>
-            </ul>
-        </nav>
-    </header>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blacktip Solutions</title>
+  <!-- Display + UI fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* brand approximations derived from your logo */
+      --bg: #070c12;              /* charcoal */
+      --bg-2: #0a121a;            /* deep navy */
+      --text: #e7eef6;            /* off‑white */
+      --muted: #9db1c5;           /* slate */
+      --brand: #2ecdbd;           /* teal */
+      --brand-2: #8be7cc;         /* mint */
+      --card: #0e1620;            /* panel */
+      --ring: rgba(46, 205, 189, .25);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; color: var(--text);
+      font: 16px/1.55 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 600px at 85% -10%, rgba(139,231,204,.07), transparent),
+                  radial-gradient(900px 500px at 10% 0%, rgba(46,205,189,.08), transparent),
+                  linear-gradient(180deg, var(--bg), var(--bg-2));
+    }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-    <main>
-        <div class="background-image"></div>
-        <div class="overlay-text">
-            PROTECT IT. DISRUPT IT. EVOLVE IT.
-        </div>
-    </main>
+    /* Header */
+    header { position: sticky; top:0; z-index: 50; }
+    .navwrap {
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 18px 0; gap: 18px;
+      backdrop-filter: blur(8px) saturate(1.08);
+    }
+    .logo-img { height: 36px; width:auto; display:block; }
 
-    script.js</script>
+    nav ul { list-style:none; display:flex; gap: 24px; margin:0; padding:0; align-items:center; }
+    nav a { color: var(--text); text-decoration:none; font-weight:600; font-size:14.5px; opacity:.9; }
+    nav a.active { color:#f2fffb; position: relative; }
+    nav a.active::after { content:""; position:absolute; left:0; right:0; bottom:-10px; height:3px; border-radius:3px; background: linear-gradient(90deg, var(--brand), var(--brand-2)); }
+
+    .cta {
+      --c: var(--brand);
+      appearance:none; border:0; color:#081018; font: 800 14px/1 Outfit, Inter; text-transform:none;
+      padding: 12px 18px; background: #dff7ff; border-radius: 10px; cursor:pointer; position: relative; isolation: isolate;
+    }
+    .cta::before, .cta::after {
+      content:""; position:absolute; inset:0; border:2px solid var(--c); border-radius: 10px; pointer-events:none;
+      clip-path: polygon(0 0, 22px 0, 22px 6px, 6px 6px, 6px calc(100% - 6px), 22px calc(100% - 6px), 22px 100%, 0 100%);
+      opacity:.55;
+    }
+    .cta:hover { box-shadow: 0 0 0 6px var(--ring); }
+
+    /* Hero */
+    .hero { position: relative; min-height: 72vh; display:grid; align-items: end; }
+    .media { position:absolute; inset:0; overflow:hidden; }
+    .media img { width:100%; height:100%; object-fit: cover; filter: saturate(1.02) contrast(1.02) brightness(.9); }
+    .media::after { content:""; position:absolute; inset:0; background:
+      radial-gradient(70% 55% at 25% 35%, rgba(0,0,0,.0), rgba(0,0,0,.35) 45%, rgba(0,0,0,.78) 75%),
+      linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65)); }
+
+    .headline { position:relative; padding: 110px 0 80px; }
+    h1 { font: 900 clamp(32px, 6vw, 56px)/1.02 Outfit, Inter; letter-spacing:.02em; margin:0 0 10px; }
+    .display { font: 900 clamp(28px, 5.2vw, 48px)/1.05 Outfit, Inter; }
+    .accent { color: #ffffff; }
+    .kicker { font: 800 14px/1.25 Outfit, Inter; letter-spacing:.16em; text-transform: uppercase; color: var(--brand); margin-bottom: 10px; }
+    .subline { font: 700 clamp(14px, 2.2vw, 18px)/1.4 Outfit, Inter; color: var(--text); opacity:.95; }
+
+    .progress { height: 4px; width: 180px; border-radius: 999px; background: rgba(255,255,255,.08); overflow:hidden; margin-top: 18px; }
+    .progress > i { display:block; height:100%; width: 38%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); }
+
+    /* Footer */
+    footer { color: var(--muted); font-size: 14px; border-top: 1px solid rgba(255,255,255,.06); }
+    .foot { padding: 24px 0 60px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+
+    /* Mobile */
+    .hamburger { display:none; background:none; border:0; color:var(--text); font-size:22px; padding:8px; border-radius:10px; }
+    @media (max-width: 960px) {
+      .hamburger { display:block; }
+      nav { position: fixed; inset: 64px 16px auto; background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius:14px; padding: 12px; display:none; }
+      nav.open { display:block; }
+      nav ul { flex-direction:column; align-items:stretch; gap:6px; }
+      nav a.active::after { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container navwrap">
+      <a href="#home" class="logo" aria-label="Blacktip Solutions">
+        <!-- Replace the src path with where you store the file in your repo -->
+        <img class="logo-img" src="assets/blacktip-logo.png" alt="Blacktip Solutions logo" />
+      </a>
+
+      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Toggle navigation">☰</button>
+
+      <nav id="siteNav" aria-label="Main">
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#capabilities">Capabilities ▾</a></li>
+          <li><a href="#staffing">Staffing ▾</a></li>
+          <li><a href="#company">Company ▾</a></li>
+          <li><button class="cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home" class="hero">
+    <div class="media" aria-hidden="true">
+      <!-- Use your banner image from brand kit -->
+      <img src="assets/hero-ocean-banner.png" alt="Underwater sunlight beams" />
+    </div>
+    <div class="container headline">
+      <div class="kicker">Blacktip Solutions</div>
+      <h1 class="display accent">PROFESSIONAL SERVICES & EXECUTIVE CONSULTING</h1>
+      <p class="subline">Precision. Speed. Focused Execution.</p>
+      <div class="progress"><i></i></div>
+    </div>
+  </main>
+
+  <section class="container" style="padding: 48px 24px 0;">
+    <img src="assets/hero-shark.png" alt="Blacktip shark swimming" style="width:100%; height:auto; border-radius: 10px; border:1px solid rgba(255,255,255,.06);" />
+  </section>
+
+  <section id="contact" class="container" style="padding: 60px 24px 96px;">
+    <div style="background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px 20px;">
+      <h2 style="margin:0 0 10px; font: 800 26px/1.15 Outfit, Inter;">Get in touch</h2>
+      <p style="margin:0 0 16px; color:var(--muted); max-width:70ch;">Want a quick scoping call or want to send an RFP? Email <a style="color:var(--brand)" href="mailto:hello@blacktipops.com">hello@blacktipops.com</a> and we’ll respond promptly.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="cta" href="mailto:hello@blacktipops.com" style="--c: var(--brand-2); background:linear-gradient(180deg,#eafff9,#c7fff0);">Email us</a>
+        <a class="cta" href="#" style="background:#eaf8ff; --c: var(--brand);">Download capability statement</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <div>© <span id="year"></span> Blacktip Solutions</div>
+      <div style="opacity:.75">CAGE / DUNS / UEI pending</div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const siteNav = document.getElementById('siteNav');
+    navToggle?.addEventListener('click', () => {
+      const open = siteNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
