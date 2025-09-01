@@ -152,7 +152,7 @@
       <p style="margin:0 0 16px; color:var(--muted); max-width:70ch;">Want a quick scoping call or want to send an RFP? Email <a style="color:var(--brand)" href="mailto:corporate@blacktip-ops.com">corporate@blacktip-ops.com</a> and we’ll respond promptly.</p>
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
         <a class="cta" href="mailto:corporate@blacktip-ops.com" style="--c: var(--brand-2); background:linear-gradient(180deg,#eafff9,#c7fff0);">Email us</a>
-        <a class="cta" href="#" style="background:#eaf8ff; --c: var(--brand);">Download capability statement</a>
+        <a class="cta" onclick="downloadCapabilityStatement()" style="background:#eaf8ff; --c: var(--brand);">Download capability statement</a>
       </div>
     </div>
   </section>
@@ -172,6 +172,15 @@
       navToggle.setAttribute('aria-expanded', String(open));
     });
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    function downloadCapabilityStatement() {
+      const link = document.createElement('a');
+      link.href = 'blacktip-site-starter/assets/Blacktip_Capability_Statement.pdf';
+      link.download = 'Blacktip_Capability_Statement.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   </script>
 </body>
 </html>
