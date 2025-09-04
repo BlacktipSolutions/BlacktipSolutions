@@ -1,0 +1,25 @@
+/* Global CSS variables */
+:root {
+  /* brand approximations derived from your logo */
+  --bg: #070c12;              /* charcoal */
+  --bg-2: #0a121a;            /* deep navy */
+  --text: #e7eef6;            /* off‑white */
+  --muted: #9db1c5;           /* slate */
+  --brand: #2ecdbd;           /* teal */
+  --brand-2: #8be7cc;         /* mint */
+  --card: #0e1620;            /* panel */
+  --ring: rgba(46, 205, 189, .25);
+}
+
+/* Base styles */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; color: var(--text);
+  font: 16px/1.55 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: radial-gradient(1200px 600px at 85% -10%, rgba(139,231,204,.07), transparent),
+              radial-gradient(900px 500px at 10% 0%, rgba(46,205,189,.08), transparent),
+              linear-gradient(180deg, var(--bg), var(--bg-2));
+}
+
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }

@@ -1,0 +1,181 @@
+/* Desktop and Mobile visibility */
+.desktop-only { display: block; }
+.mobile-only { display: none; }
+
+/* Header */
+header { position: sticky; top:0; z-index: 50; }
+.navwrap {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 18px 0; gap: 18px;
+  backdrop-filter: blur(8px) saturate(1.08);
+}
+.logo-img { height: 36px; width:auto; display:block; }
+
+nav ul { list-style:none; display:flex; gap: 24px; margin:0; padding:0; align-items:center; }
+nav a { color: var(--text); text-decoration:none; font-weight:600; font-size:14.5px; opacity:.9; }
+nav a.active { color:#f2fffb; position: relative; }
+nav a.active::after { content:""; position:absolute; left:0; right:0; bottom:-10px; height:3px; border-radius:3px; background: linear-gradient(90deg, var(--brand), var(--brand-2)); }
+
+.cta {
+  --c: var(--brand);
+  appearance:none; border:0; color:#081018; font: 800 14px/1 Outfit, Inter; text-transform:none;
+  padding: 12px 18px; background: #dff7ff; border-radius: 10px; cursor:pointer; position: relative; isolation: isolate;
+}
+.cta::before, .cta::after {
+  content:""; position:absolute; inset:0; border:2px solid var(--c); border-radius: 10px; pointer-events:none;
+  clip-path: polygon(0 0, 22px 0, 22px 6px, 6px 6px, 6px calc(100% - 6px), 22px calc(100% - 6px), 22px 100%, 0 100%);
+  opacity:.55;
+}
+.cta:hover { box-shadow: 0 0 0 6px var(--ring); }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 350px;
+  display: grid;
+  align-items: end;
+  overflow: hidden; /* Ensure pseudo-elements stay within bounds */
+}
+
+.hero-background-animation {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--bg), var(--bg-2)); /* Base background */
+  z-index: -1;
+  animation: subtle-pulse 10s infinite alternate;
+}
+
+.hero-background-animation::before,
+.hero-background-animation::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  filter: blur(50px);
+}
+
+.hero-background-animation::before {
+  width: 800px;
+  height: 800px;
+  background: var(--brand-2);
+  top: -200px;
+  left: -200px;
+  animation: move-and-fade-1 15s infinite ease-in-out;
+}
+
+.hero-background-animation::after {
+  width: 600px;
+  height: 600px;
+  background: var(--brand);
+  bottom: -200px;
+  right: -200px;
+  animation: move-and-fade-2 18s infinite ease-in-out;
+}
+
+@keyframes subtle-pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes move-and-fade-1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+  25% { transform: translate(50px, 50px) scale(1.1); opacity: 0.15; }
+  50% { transform: translate(0, 100px) scale(1.2); opacity: 0.1; }
+  75% { transform: translate(-50px, 50px) scale(1.1); opacity: 0.15; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+}
+
+@keyframes move-and-fade-2 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+  25% { transform: translate(-50px, -50px) scale(1.1); opacity: 0.15; }
+  50% { transform: translate(0, -100px) scale(1.2); opacity: 0.1; }
+  75% { transform: translate(50px, -50px) scale(1.1); opacity: 0.15; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+}
+
+.headline { position:relative; padding: 110px 0 80px; }
+h1 { font: 900 clamp(32px, 6vw, 56px)/1.02 Outfit, Inter; letter-spacing:.02em; margin:0 0 10px; }
+.display { font: 900 clamp(28px, 5.2vw, 48px)/1.05 Outfit, Inter; }
+.accent { color: #ffffff; }
+.kicker { font: 800 14px/1.25 Outfit, Inter; letter-spacing:.16em; text-transform: uppercase; color: var(--brand); margin-bottom: 10px; }
+.subline { font: 700 clamp(14px, 2.2vw, 18px)/1.4 Outfit, Inter; color: var(--text); opacity:.95; }
+
+/* Responsive image for the shark */
+.container > img { max-width: 100%; height: auto; display: block; margin: 0 auto; padding-top: 24px; padding-bottom: 24px;}
+
+.progress { height: 4px; width: 180px; border-radius: 999px; background: rgba(255,255,255,.08); overflow:hidden; margin-top: 18px; }
+.progress > i { display:block; height:100%; width: 38%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); }
+
+/* Footer */
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid rgba(255,255,255,.06); }
+.foot { padding: 24px 0 60px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+
+/* Mobile */
+.hamburger { display:none; background:none; border:0; color:var(--text); font-size:22px; padding:8px; border-radius:10px; }
+@media (max-width: 960px) {
+  .hamburger { display:block; }
+  nav { position: fixed; inset: 64px 16px auto; background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius:14px; padding: 12px; display:none; }
+  nav.open { display:block; }
+  nav ul { flex-direction:column; align-items:stretch; gap:6px; }
+  nav a.active::after { display:none; }
+  .desktop-only { display: none; } /* Hide desktop-only elements on mobile */
+  .mobile-only { display: block; } /* Show mobile-only elements on mobile */
+}
+@media (max-width: 768px) {
+  h1 { font-size: clamp(28px, 8vw, 48px); }
+  .display { font-size: clamp(24px, 7vw, 40px); }
+  .subline { font-size: clamp(12px, 3vw, 16px); }
+  .container { padding: 0 16px; } /* Adjust container padding for smaller screens */
+  .headline { padding: 80px 0 60px; } /* Adjust hero headline padding */
+  section.container { padding: 32px 16px 0 !important; } /* Adjust section padding */
+  #contact.container { padding: 40px 16px 60px !important; } /* Adjust contact section padding */
+  .hero { padding: 0 20px; } /* Add padding to hero section on mobile */
+}
+
+/* Styles for the shark image section */
+.hero-shark-section {
+  padding: 48px 24px 0;
+}
+
+/* Styles for the contact section */
+.contact-section {
+  padding: 60px 24px 96px;
+}
+
+.contact-card {
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  padding:24px 20px;
+}
+
+.contact-title {
+  margin:0 0 10px;
+  font: 800 26px/1.15 Outfit, Inter;
+}
+
+.contact-description {
+  margin:0 0 16px;
+  color:var(--muted);
+  max-width:70ch;
+}
+
+.contact-email {
+  color:var(--brand);
+}
+
+.contact-buttons {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.email-cta {
+  --c: var(--brand-2);
+  background:linear-gradient(180deg,#eafff9,#c7fff0);
+}
+
+.download-cta {
+  background:#eaf8ff;
+  --c: var(--brand);
+}
