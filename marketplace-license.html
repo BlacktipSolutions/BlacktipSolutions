@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Request Your Refine License — Blacktip Solutions</title>
+  <meta name="description" content="AWS Marketplace customers — submit your DeliveryBucketName and we'll deliver your Refine license within one business hour." />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="refine.css">
+</head>
+<body>
+  <header>
+    <div class="container navwrap">
+      <a href="index.html" class="logo" aria-label="Blacktip Solutions">
+        <img class="logo-img" src="blacktip-site-starter/assets/blacktip-logo-2.png" alt="Blacktip Solutions logo" />
+      </a>
+
+      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Toggle navigation">☰</button>
+
+      <nav id="siteNav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="refine.html">Refine</a></li>
+          <li><a class="cta" href="mailto:corporate@blacktip-ops.com">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero hero-compact">
+    <div class="hero-background-animation"></div>
+    <div class="container headline">
+      <div class="kicker">AWS Marketplace · BYOL Fulfillment</div>
+      <h1 class="display accent">Request your Refine license</h1>
+      <p class="subline">You've subscribed to Refine on AWS Marketplace and launched the CloudFormation stack. Send us your <code>DeliveryBucketName</code> and we'll upload your Ed25519-signed license file within one business hour.</p>
+    </div>
+  </main>
+
+  <section class="container form-section">
+    <div class="form-grid">
+      <div class="form-explainer">
+        <h2 class="section-title">What happens next</h2>
+        <ol class="explainer-list">
+          <li><strong>You submit this form</strong> with the bucket name from your CFN Outputs.</li>
+          <li><strong>Blacktip generates your Ed25519-signed license</strong> bound to your CFN stack's installation ID.</li>
+          <li><strong>We upload <code>refine.license</code></strong> (~500 bytes) to your delivery bucket via AWS S3.</li>
+          <li><strong>The license-watcher on your EC2 picks it up</strong> within 60 seconds and restarts the container.</li>
+          <li><strong>Refine's UI is live</strong> ~30 seconds after that. You'll receive an email from <code>AMelcher@blacktip-ops.com</code> with your activation code.</li>
+        </ol>
+        <p class="explainer-foot">SLA: response within <strong>1 business hour</strong> during US business hours (Mon–Fri, 9am–5pm ET). Questions? Email <a href="mailto:corporate@blacktip-ops.com">corporate@blacktip-ops.com</a>.</p>
+      </div>
+
+      <form class="byol-form" action="https://formspree.io/f/xeedbagj" method="POST">
+        <h2 class="section-title">Your license request</h2>
+
+        <label class="field">
+          <span class="label">Company / Organization <span class="req">*</span></span>
+          <input name="company" type="text" required placeholder="Acme Corp" />
+        </label>
+
+        <label class="field">
+          <span class="label">Contact email <span class="req">*</span></span>
+          <input name="email" type="email" required placeholder="finops@acmecorp.com" />
+          <span class="hint">Where we send the activation code.</span>
+        </label>
+
+        <label class="field">
+          <span class="label">AWS Marketplace customer ID <span class="req">*</span></span>
+          <input name="marketplace_customer_id" type="text" required placeholder="e.g. 7Xy2z3-AbCdEfGhIjKl" />
+          <span class="hint">From your AWS Marketplace subscription confirmation email.</span>
+        </label>
+
+        <label class="field">
+          <span class="label">DeliveryBucketName <span class="req">*</span></span>
+          <input name="delivery_bucket" type="text" required placeholder="refine-delivery-acme-a1b2c3d4" />
+          <span class="hint">Copy this exactly from your CFN stack's Outputs tab.</span>
+        </label>
+
+        <label class="field">
+          <span class="label">AWS region of your Refine stack <span class="req">*</span></span>
+          <select name="aws_region" required>
+            <option value="" disabled selected>Select a region…</option>
+            <option value="us-east-1">us-east-1 (N. Virginia)</option>
+            <option value="us-east-2">us-east-2 (Ohio)</option>
+            <option value="us-west-1">us-west-1 (N. California)</option>
+            <option value="us-west-2">us-west-2 (Oregon)</option>
+            <option value="ca-central-1">ca-central-1 (Canada)</option>
+            <option value="eu-west-1">eu-west-1 (Ireland)</option>
+            <option value="eu-west-2">eu-west-2 (London)</option>
+            <option value="eu-central-1">eu-central-1 (Frankfurt)</option>
+            <option value="ap-southeast-1">ap-southeast-1 (Singapore)</option>
+            <option value="ap-southeast-2">ap-southeast-2 (Sydney)</option>
+            <option value="ap-northeast-1">ap-northeast-1 (Tokyo)</option>
+            <option value="other">Other (note in message below)</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">Number of cloud accounts you plan to monitor</span>
+          <select name="account_count">
+            <option value="1-5" selected>1–5 accounts</option>
+            <option value="6-20">6–20 accounts</option>
+            <option value="21-50">21–50 accounts</option>
+            <option value="51+">51+ accounts</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">Primary cloud focus</span>
+          <select name="cloud_focus">
+            <option value="aws-only" selected>AWS only</option>
+            <option value="aws-azure">AWS + Azure</option>
+            <option value="aws-azure-gcp">AWS + Azure + GCP</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label">Anything else we should know? (optional)</span>
+          <textarea name="notes" rows="3" placeholder="GovCloud, specific timing constraints, custom EULA requirements, etc."></textarea>
+        </label>
+
+        <input type="hidden" name="_subject" value="Refine BYOL license request" />
+
+        <button type="submit" class="cta cta-submit">Submit license request</button>
+
+        <p class="form-foot">By submitting, you confirm you've subscribed to <em>Blacktip Refine</em> on AWS Marketplace and launched the CloudFormation stack. Submissions are emailed directly to Blacktip Solutions — we don't share them with anyone.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <div>© <span id="year"></span> Blacktip Solutions</div>
+      <div style="opacity:.75">UEI: SU55FSWCWK98</div>
+      <div style="opacity:.75">CAGE Code: 14QNO</div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
