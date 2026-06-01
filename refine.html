@@ -169,14 +169,21 @@
         <div class="step-num">4</div>
         <div class="step-body">
           <h3>Submit your license request</h3>
-          <p>Fill in our <a href="marketplace-license.html">one-page license-request form</a> with your <code>DeliveryBucketName</code> from the CFN Outputs. Blacktip uploads a ~500-byte Ed25519-signed license file to your bucket within one business hour.</p>
+          <p>Fill in our <a href="marketplace-license.html">one-page license-request form</a> with your CFN Outputs and the cloud accounts Refine will monitor. Blacktip emails you a ~500-byte Ed25519-signed license file within one business hour.</p>
         </div>
       </li>
       <li>
         <div class="step-num">5</div>
         <div class="step-body">
+          <h3>Drop the license into your bucket</h3>
+          <p>One <code>aws s3 cp refine.license s3://&lt;your-DeliveryBucketName&gt;/</code> from any shell with access to your AWS account — Commercial or GovCloud, works the same since the upload runs from your environment. ~5 seconds.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">6</div>
+        <div class="step-body">
           <h3>License-watcher installs it automatically</h3>
-          <p>A watcher daemon on the EC2 polls the bucket every 60 seconds, atomic-swaps the license in, and restarts the container. Refine validates the license offline and the UI is live ~30 seconds later.</p>
+          <p>A watcher daemon on the EC2 polls the bucket every 60 seconds, atomic-swaps the license in, and restarts the container. Refine validates the license offline against an Ed25519 public key baked into the image, and the UI is live ~30 seconds later.</p>
         </div>
       </li>
       <li>

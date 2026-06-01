@@ -34,7 +34,7 @@
     <div class="container headline">
       <div class="kicker">AWS Marketplace · BYOL Fulfillment</div>
       <h1 class="display accent">Request your Refine license</h1>
-      <p class="subline">You've subscribed to Refine on AWS Marketplace and launched the CloudFormation stack. Send us your <code>DeliveryBucketName</code> and we'll upload your Ed25519-signed license file within one business hour.</p>
+      <p class="subline">You've subscribed to Refine on AWS Marketplace and launched the CloudFormation stack. Tell us the cloud accounts you plan to monitor; we'll email you your Ed25519-signed license file within one business hour. You drop it into your delivery bucket with a one-line CLI command — your license-watcher takes it from there.</p>
     </div>
   </main>
 
@@ -45,9 +45,10 @@
         <ol class="explainer-list">
           <li><strong>You submit this form</strong> with your CFN Outputs and the IDs of every cloud account Refine will monitor.</li>
           <li><strong>Blacktip generates your Ed25519-signed license</strong> bound to your CFN stack's installation ID and the cloud accounts you listed.</li>
-          <li><strong>We upload <code>refine.license</code></strong> (~500 bytes) to your delivery bucket via AWS S3.</li>
+          <li><strong>We email you the ~500-byte <code>refine.license</code> file</strong> and a one-line <code>aws s3 cp</code> command from <code>AMelcher@blacktip-ops.com</code>.</li>
+          <li><strong>You drop the file into your delivery bucket</strong> with the one-line CLI command (~5 seconds). Works the same on Commercial AWS and GovCloud since the upload happens from your own account.</li>
           <li><strong>The license-watcher on your EC2 picks it up</strong> within 60 seconds and restarts the container.</li>
-          <li><strong>Refine's UI is live</strong> ~30 seconds after that. You'll receive an email from <code>AMelcher@blacktip-ops.com</code> with your activation code.</li>
+          <li><strong>Refine's UI is live</strong> ~30 seconds after that — paste the activation code from the email and you're in.</li>
         </ol>
         <h3 class="explainer-subhead">Have these ready</h3>
         <ul class="explainer-checklist">
@@ -107,7 +108,7 @@
           <label class="field">
             <span class="label">Host AWS Account ID <span class="req">*</span></span>
             <input name="host_account_id" type="text" required pattern="\d{12}" maxlength="12" placeholder="111122223333" inputmode="numeric" />
-            <span class="hint">12 digits, no dashes. The account where the Marketplace CFN stack runs.</span>
+            <span class="hint">12 digits, no dashes. The account where the Marketplace CFN stack runs. Find it: AWS Console top-right account menu, or <code>aws sts get-caller-identity</code>.</span>
           </label>
 
           <label class="field">
@@ -225,6 +226,7 @@
         <label class="field">
           <span class="label">Account ID <span class="req">*</span></span>
           <input data-name="account_id" type="text" required pattern="\d{12}" maxlength="12" placeholder="111122223333" inputmode="numeric" />
+          <span class="hint">12 digits. <code>aws sts get-caller-identity</code> while logged into that account.</span>
         </label>
         <label class="field">
           <span class="label">Partition <span class="req">*</span></span>
@@ -232,6 +234,7 @@
             <option value="commercial">Commercial (aws)</option>
             <option value="govcloud">GovCloud (aws-us-gov)</option>
           </select>
+          <span class="hint">GovCloud accounts have separate 12-digit IDs from their linked commercial accounts.</span>
         </label>
         <label class="field">
           <span class="label">Friendly name (optional)</span>
@@ -251,10 +254,12 @@
         <label class="field">
           <span class="label">Subscription ID <span class="req">*</span></span>
           <input data-name="subscription_id" type="text" required pattern="[0-9a-fA-F\-]{36}" maxlength="36" placeholder="00000000-0000-0000-0000-000000000000" />
+          <span class="hint">UUID format. Azure Portal → search "Subscriptions", or <code>az account show --query id -o tsv</code>.</span>
         </label>
         <label class="field">
-          <span class="label">Tenant ID (Entra ID) <span class="req">*</span></span>
-          <input data-name="tenant_id" type="text" required pattern="[0-9a-fA-F\-]{36}" maxlength="36" placeholder="00000000-0000-0000-0000-000000000000" />
+          <span class="label">Tenant ID (Entra ID)</span>
+          <input data-name="tenant_id" type="text" pattern="[0-9a-fA-F\-]{36}" maxlength="36" placeholder="00000000-0000-0000-0000-000000000000" />
+          <span class="hint">Optional — auto-discovered during onboarding. Azure Portal → Microsoft Entra ID → Overview, or <code>az account show --query tenantId -o tsv</code>.</span>
         </label>
         <label class="field">
           <span class="label">Azure cloud <span class="req">*</span></span>
@@ -262,6 +267,7 @@
             <option value="public">Azure Public</option>
             <option value="usgov">Azure US Government</option>
           </select>
+          <span class="hint">US Government tenants use <code>*.usgovcloudapi.net</code> endpoints.</span>
         </label>
         <label class="field">
           <span class="label">Friendly name (optional)</span>
@@ -281,10 +287,12 @@
         <label class="field">
           <span class="label">Project ID <span class="req">*</span></span>
           <input data-name="project_id" type="text" required pattern="[a-z][a-z0-9\-]{4,28}[a-z0-9]" maxlength="30" placeholder="my-finops-project" />
+          <span class="hint">Lowercase letters, digits, hyphens. Visible in GCP Console header, or <code>gcloud projects list</code>.</span>
         </label>
         <label class="field">
           <span class="label">Organization ID (optional)</span>
           <input data-name="org_id" type="text" pattern="\d{10,15}" placeholder="123456789012" inputmode="numeric" />
+          <span class="hint">Leave blank if the project isn't in an org. GCP Console → IAM &amp; Admin → Settings, or <code>gcloud organizations list</code>.</span>
         </label>
         <label class="field">
           <span class="label">Variant <span class="req">*</span></span>
@@ -292,6 +300,7 @@
             <option value="standard">Standard GCP</option>
             <option value="assured-workloads">Assured Workloads (Gov)</option>
           </select>
+          <span class="hint">Assured Workloads = government-controlled environment with stricter data residency.</span>
         </label>
         <label class="field">
           <span class="label">Friendly name (optional)</span>
