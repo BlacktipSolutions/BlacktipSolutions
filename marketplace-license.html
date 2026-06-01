@@ -43,83 +43,167 @@
       <div class="form-explainer">
         <h2 class="section-title">What happens next</h2>
         <ol class="explainer-list">
-          <li><strong>You submit this form</strong> with the bucket name from your CFN Outputs.</li>
-          <li><strong>Blacktip generates your Ed25519-signed license</strong> bound to your CFN stack's installation ID.</li>
+          <li><strong>You submit this form</strong> with your CFN Outputs and the IDs of every cloud account Refine will monitor.</li>
+          <li><strong>Blacktip generates your Ed25519-signed license</strong> bound to your CFN stack's installation ID and the cloud accounts you listed.</li>
           <li><strong>We upload <code>refine.license</code></strong> (~500 bytes) to your delivery bucket via AWS S3.</li>
           <li><strong>The license-watcher on your EC2 picks it up</strong> within 60 seconds and restarts the container.</li>
           <li><strong>Refine's UI is live</strong> ~30 seconds after that. You'll receive an email from <code>AMelcher@blacktip-ops.com</code> with your activation code.</li>
         </ol>
+        <h3 class="explainer-subhead">Have these ready</h3>
+        <ul class="explainer-checklist">
+          <li>AWS Marketplace customer ID (from the subscription confirmation email)</li>
+          <li>The CFN stack <code>DeliveryBucketName</code> from the Outputs tab</li>
+          <li>For <strong>AWS</strong>: 12-digit account IDs + whether each is Commercial or GovCloud</li>
+          <li>For <strong>Azure</strong>: subscription UUID + tenant UUID + whether it's Azure Public or US Government</li>
+          <li>For <strong>GCP</strong>: project ID + (optional) organization ID + whether it's Standard or Assured Workloads (Government)</li>
+        </ul>
         <p class="explainer-foot">SLA: response within <strong>1 business hour</strong> during US business hours (Mon–Fri, 9am–5pm ET). Questions? Email <a href="mailto:corporate@blacktip-ops.com">corporate@blacktip-ops.com</a>.</p>
       </div>
 
-      <form class="byol-form" action="https://formspree.io/f/xeedbagj" method="POST">
+      <form class="byol-form" id="byolForm" action="https://formspree.io/f/xeedbagj" method="POST">
         <h2 class="section-title">Your license request</h2>
 
-        <label class="field">
-          <span class="label">Company / Organization <span class="req">*</span></span>
-          <input name="company" type="text" required placeholder="Acme Corp" />
-        </label>
+        <!-- About you -->
+        <fieldset class="form-block">
+          <legend class="block-title">About you</legend>
 
-        <label class="field">
-          <span class="label">Contact email <span class="req">*</span></span>
-          <input name="email" type="email" required placeholder="finops@acmecorp.com" />
-          <span class="hint">Where we send the activation code.</span>
-        </label>
+          <label class="field">
+            <span class="label">Company / Organization <span class="req">*</span></span>
+            <input name="company" type="text" required placeholder="Acme Corp" />
+          </label>
 
-        <label class="field">
-          <span class="label">AWS Marketplace customer ID <span class="req">*</span></span>
-          <input name="marketplace_customer_id" type="text" required placeholder="e.g. 7Xy2z3-AbCdEfGhIjKl" />
-          <span class="hint">From your AWS Marketplace subscription confirmation email.</span>
-        </label>
+          <label class="field">
+            <span class="label">Contact email <span class="req">*</span></span>
+            <input name="email" type="email" required placeholder="finops@acmecorp.com" />
+            <span class="hint">Where we send the activation code.</span>
+          </label>
 
-        <label class="field">
-          <span class="label">DeliveryBucketName <span class="req">*</span></span>
-          <input name="delivery_bucket" type="text" required placeholder="refine-delivery-acme-a1b2c3d4" />
-          <span class="hint">Copy this exactly from your CFN stack's Outputs tab.</span>
-        </label>
+          <label class="field">
+            <span class="label">AWS Marketplace customer ID <span class="req">*</span></span>
+            <input name="marketplace_customer_id" type="text" required placeholder="e.g. 7Xy2z3-AbCdEfGhIjKl" />
+            <span class="hint">From your AWS Marketplace subscription confirmation email.</span>
+          </label>
+        </fieldset>
 
-        <label class="field">
-          <span class="label">AWS region of your Refine stack <span class="req">*</span></span>
-          <select name="aws_region" required>
-            <option value="" disabled selected>Select a region…</option>
-            <option value="us-east-1">us-east-1 (N. Virginia)</option>
-            <option value="us-east-2">us-east-2 (Ohio)</option>
-            <option value="us-west-1">us-west-1 (N. California)</option>
-            <option value="us-west-2">us-west-2 (Oregon)</option>
-            <option value="ca-central-1">ca-central-1 (Canada)</option>
-            <option value="eu-west-1">eu-west-1 (Ireland)</option>
-            <option value="eu-west-2">eu-west-2 (London)</option>
-            <option value="eu-central-1">eu-central-1 (Frankfurt)</option>
-            <option value="ap-southeast-1">ap-southeast-1 (Singapore)</option>
-            <option value="ap-southeast-2">ap-southeast-2 (Sydney)</option>
-            <option value="ap-northeast-1">ap-northeast-1 (Tokyo)</option>
-            <option value="other">Other (note in message below)</option>
-          </select>
-        </label>
+        <!-- Refine host -->
+        <fieldset class="form-block">
+          <legend class="block-title">Where Refine runs (host stack)</legend>
+          <p class="block-help">The AWS account, partition, and region where you launched the Marketplace CloudFormation stack.</p>
 
-        <label class="field">
-          <span class="label">Number of cloud accounts you plan to monitor</span>
-          <select name="account_count">
-            <option value="1-5" selected>1–5 accounts</option>
-            <option value="6-20">6–20 accounts</option>
-            <option value="21-50">21–50 accounts</option>
-            <option value="51+">51+ accounts</option>
-          </select>
-        </label>
+          <div class="field">
+            <span class="label">AWS partition <span class="req">*</span></span>
+            <div class="radio-row">
+              <label class="radio-pill">
+                <input type="radio" name="host_partition" value="commercial" checked />
+                <span>Commercial (<code>aws</code>)</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="host_partition" value="govcloud" />
+                <span>GovCloud (<code>aws-us-gov</code>)</span>
+              </label>
+            </div>
+          </div>
 
-        <label class="field">
-          <span class="label">Primary cloud focus</span>
-          <select name="cloud_focus">
-            <option value="aws-only" selected>AWS only</option>
-            <option value="aws-azure">AWS + Azure</option>
-            <option value="aws-azure-gcp">AWS + Azure + GCP</option>
-          </select>
-        </label>
+          <label class="field">
+            <span class="label">Host AWS Account ID <span class="req">*</span></span>
+            <input name="host_account_id" type="text" required pattern="\d{12}" maxlength="12" placeholder="111122223333" inputmode="numeric" />
+            <span class="hint">12 digits, no dashes. The account where the Marketplace CFN stack runs.</span>
+          </label>
 
-        <label class="field">
-          <span class="label">Anything else we should know? (optional)</span>
-          <textarea name="notes" rows="3" placeholder="GovCloud, specific timing constraints, custom EULA requirements, etc."></textarea>
-        </label>
+          <label class="field">
+            <span class="label">AWS region of your Refine stack <span class="req">*</span></span>
+            <select name="host_region" required>
+              <option value="" disabled selected>Select a region…</option>
+              <optgroup label="Commercial">
+                <option value="us-east-1">us-east-1 (N. Virginia)</option>
+                <option value="us-east-2">us-east-2 (Ohio)</option>
+                <option value="us-west-1">us-west-1 (N. California)</option>
+                <option value="us-west-2">us-west-2 (Oregon)</option>
+                <option value="ca-central-1">ca-central-1 (Canada Central)</option>
+                <option value="eu-west-1">eu-west-1 (Ireland)</option>
+                <option value="eu-west-2">eu-west-2 (London)</option>
+                <option value="eu-central-1">eu-central-1 (Frankfurt)</option>
+                <option value="ap-southeast-1">ap-southeast-1 (Singapore)</option>
+                <option value="ap-southeast-2">ap-southeast-2 (Sydney)</option>
+                <option value="ap-northeast-1">ap-northeast-1 (Tokyo)</option>
+              </optgroup>
+              <optgroup label="GovCloud">
+                <option value="us-gov-west-1">us-gov-west-1</option>
+                <option value="us-gov-east-1">us-gov-east-1</option>
+              </optgroup>
+              <option value="other">Other (note below)</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="label">DeliveryBucketName <span class="req">*</span></span>
+            <input name="delivery_bucket" type="text" required placeholder="refine-delivery-acme-a1b2c3d4" />
+            <span class="hint">Copy this exactly from your CFN stack's Outputs tab.</span>
+          </label>
+        </fieldset>
+
+        <!-- Monitored clouds -->
+        <fieldset class="form-block">
+          <legend class="block-title">Cloud accounts to monitor</legend>
+          <p class="block-help">Check every cloud Refine should monitor. Fields appear below for the cloud(s) you select. Your host AWS account is included automatically — only list <em>additional</em> accounts here.</p>
+
+          <div class="cloud-checks">
+            <label class="cloud-check">
+              <input type="checkbox" id="useAws" name="monitor_clouds" value="aws" />
+              <span class="cloud-check-body">
+                <span class="cloud-name">AWS</span>
+                <span class="cloud-sub">Commercial + GovCloud accounts</span>
+              </span>
+            </label>
+            <label class="cloud-check">
+              <input type="checkbox" id="useAzure" name="monitor_clouds" value="azure" />
+              <span class="cloud-check-body">
+                <span class="cloud-name">Azure</span>
+                <span class="cloud-sub">Public + US Government subscriptions</span>
+              </span>
+            </label>
+            <label class="cloud-check">
+              <input type="checkbox" id="useGcp" name="monitor_clouds" value="gcp" />
+              <span class="cloud-check-body">
+                <span class="cloud-name">Google Cloud</span>
+                <span class="cloud-sub">Standard + Assured Workloads (Gov)</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- AWS monitored accounts -->
+        <fieldset class="form-block cloud-block" id="awsBlock" hidden>
+          <legend class="block-title">AWS monitored accounts</legend>
+          <p class="block-help">Add each AWS account Refine will collect inventory from. The host account is already included.</p>
+          <div class="account-rows" id="awsRows"></div>
+          <button type="button" class="add-row-btn" data-cloud="aws">+ Add another AWS account</button>
+        </fieldset>
+
+        <!-- Azure monitored subscriptions -->
+        <fieldset class="form-block cloud-block" id="azureBlock" hidden>
+          <legend class="block-title">Azure monitored subscriptions</legend>
+          <p class="block-help">Add each Azure subscription Refine will collect inventory from.</p>
+          <div class="account-rows" id="azureRows"></div>
+          <button type="button" class="add-row-btn" data-cloud="azure">+ Add another Azure subscription</button>
+        </fieldset>
+
+        <!-- GCP monitored projects -->
+        <fieldset class="form-block cloud-block" id="gcpBlock" hidden>
+          <legend class="block-title">GCP monitored projects</legend>
+          <p class="block-help">Add each GCP project Refine will collect inventory from. Org ID is optional but recommended if you want org-level billing-export visibility.</p>
+          <div class="account-rows" id="gcpRows"></div>
+          <button type="button" class="add-row-btn" data-cloud="gcp">+ Add another GCP project</button>
+        </fieldset>
+
+        <!-- Notes -->
+        <fieldset class="form-block">
+          <legend class="block-title">Anything else?</legend>
+          <label class="field">
+            <span class="label">Notes (optional)</span>
+            <textarea name="notes" rows="4" placeholder="Custom EULA requirements, timing constraints, # of seats, anything unusual."></textarea>
+          </label>
+        </fieldset>
 
         <input type="hidden" name="_subject" value="Refine BYOL license request" />
 
@@ -130,6 +214,93 @@
     </div>
   </section>
 
+  <!-- Account row templates (hidden, cloned by JS) -->
+  <template id="awsRowTemplate">
+    <div class="account-row" data-cloud="aws">
+      <div class="row-header">
+        <span class="row-title">AWS account #<span class="row-index">1</span></span>
+        <button type="button" class="remove-row-btn" aria-label="Remove this account">✕</button>
+      </div>
+      <div class="row-grid">
+        <label class="field">
+          <span class="label">Account ID <span class="req">*</span></span>
+          <input data-name="account_id" type="text" required pattern="\d{12}" maxlength="12" placeholder="111122223333" inputmode="numeric" />
+        </label>
+        <label class="field">
+          <span class="label">Partition <span class="req">*</span></span>
+          <select data-name="partition" required>
+            <option value="commercial">Commercial (aws)</option>
+            <option value="govcloud">GovCloud (aws-us-gov)</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="label">Friendly name (optional)</span>
+          <input data-name="name" type="text" placeholder="e.g. Production, Sandbox" />
+        </label>
+      </div>
+    </div>
+  </template>
+
+  <template id="azureRowTemplate">
+    <div class="account-row" data-cloud="azure">
+      <div class="row-header">
+        <span class="row-title">Azure subscription #<span class="row-index">1</span></span>
+        <button type="button" class="remove-row-btn" aria-label="Remove this subscription">✕</button>
+      </div>
+      <div class="row-grid">
+        <label class="field">
+          <span class="label">Subscription ID <span class="req">*</span></span>
+          <input data-name="subscription_id" type="text" required pattern="[0-9a-fA-F\-]{36}" maxlength="36" placeholder="00000000-0000-0000-0000-000000000000" />
+        </label>
+        <label class="field">
+          <span class="label">Tenant ID (Entra ID) <span class="req">*</span></span>
+          <input data-name="tenant_id" type="text" required pattern="[0-9a-fA-F\-]{36}" maxlength="36" placeholder="00000000-0000-0000-0000-000000000000" />
+        </label>
+        <label class="field">
+          <span class="label">Azure cloud <span class="req">*</span></span>
+          <select data-name="cloud" required>
+            <option value="public">Azure Public</option>
+            <option value="usgov">Azure US Government</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="label">Friendly name (optional)</span>
+          <input data-name="name" type="text" placeholder="e.g. EA Subscription, Dev" />
+        </label>
+      </div>
+    </div>
+  </template>
+
+  <template id="gcpRowTemplate">
+    <div class="account-row" data-cloud="gcp">
+      <div class="row-header">
+        <span class="row-title">GCP project #<span class="row-index">1</span></span>
+        <button type="button" class="remove-row-btn" aria-label="Remove this project">✕</button>
+      </div>
+      <div class="row-grid">
+        <label class="field">
+          <span class="label">Project ID <span class="req">*</span></span>
+          <input data-name="project_id" type="text" required pattern="[a-z][a-z0-9\-]{4,28}[a-z0-9]" maxlength="30" placeholder="my-finops-project" />
+        </label>
+        <label class="field">
+          <span class="label">Organization ID (optional)</span>
+          <input data-name="org_id" type="text" pattern="\d{10,15}" placeholder="123456789012" inputmode="numeric" />
+        </label>
+        <label class="field">
+          <span class="label">Variant <span class="req">*</span></span>
+          <select data-name="variant" required>
+            <option value="standard">Standard GCP</option>
+            <option value="assured-workloads">Assured Workloads (Gov)</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="label">Friendly name (optional)</span>
+          <input data-name="name" type="text" placeholder="e.g. Prod Workloads" />
+        </label>
+      </div>
+    </div>
+  </template>
+
   <footer>
     <div class="container foot">
       <div>© <span id="year"></span> Blacktip Solutions</div>
@@ -139,5 +310,98 @@
   </footer>
 
   <script src="main.js"></script>
+  <script>
+  (function(){
+    const cloudConfig = {
+      aws:   { block: 'awsBlock',   rows: 'awsRows',   tpl: 'awsRowTemplate',   prefix: 'aws_account',   noun: 'AWS account' },
+      azure: { block: 'azureBlock', rows: 'azureRows', tpl: 'azureRowTemplate', prefix: 'azure_sub',     noun: 'Azure subscription' },
+      gcp:   { block: 'gcpBlock',   rows: 'gcpRows',   tpl: 'gcpRowTemplate',   prefix: 'gcp_project',   noun: 'GCP project' }
+    };
+
+    function renumberRows(cloud){
+      const cfg = cloudConfig[cloud];
+      const container = document.getElementById(cfg.rows);
+      const rows = container.querySelectorAll('.account-row');
+      rows.forEach((row, idx) => {
+        const i = idx + 1;
+        row.querySelector('.row-index').textContent = i;
+        row.querySelectorAll('[data-name]').forEach(field => {
+          const fieldName = field.getAttribute('data-name');
+          field.setAttribute('name', `${cfg.prefix}_${i}_${fieldName}`);
+        });
+      });
+    }
+
+    function addRow(cloud){
+      const cfg = cloudConfig[cloud];
+      const tpl = document.getElementById(cfg.tpl);
+      const container = document.getElementById(cfg.rows);
+      const clone = tpl.content.firstElementChild.cloneNode(true);
+      const removeBtn = clone.querySelector('.remove-row-btn');
+      removeBtn.addEventListener('click', () => {
+        clone.remove();
+        renumberRows(cloud);
+      });
+      container.appendChild(clone);
+      renumberRows(cloud);
+    }
+
+    function setRequired(cloud, required){
+      const cfg = cloudConfig[cloud];
+      const container = document.getElementById(cfg.rows);
+      container.querySelectorAll('[data-name][required], [data-name]').forEach(field => {
+        // Remember original required state via data attribute
+        if (field.dataset.origRequired === undefined) {
+          field.dataset.origRequired = field.required ? 'true' : 'false';
+        }
+        if (required && field.dataset.origRequired === 'true') {
+          field.required = true;
+          field.disabled = false;
+        } else {
+          field.required = false;
+          field.disabled = !required;
+        }
+      });
+    }
+
+    function toggleCloud(cloud, checked){
+      const cfg = cloudConfig[cloud];
+      const block = document.getElementById(cfg.block);
+      const container = document.getElementById(cfg.rows);
+      if (checked) {
+        block.hidden = false;
+        if (container.children.length === 0) {
+          addRow(cloud);
+        }
+        setRequired(cloud, true);
+      } else {
+        block.hidden = true;
+        setRequired(cloud, false);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Wire cloud checkboxes
+      document.getElementById('useAws').addEventListener('change', e => toggleCloud('aws', e.target.checked));
+      document.getElementById('useAzure').addEventListener('change', e => toggleCloud('azure', e.target.checked));
+      document.getElementById('useGcp').addEventListener('change', e => toggleCloud('gcp', e.target.checked));
+
+      // Wire + Add buttons
+      document.querySelectorAll('.add-row-btn').forEach(btn => {
+        btn.addEventListener('click', () => addRow(btn.dataset.cloud));
+      });
+
+      // Form-level guard: require at least one cloud checked
+      const form = document.getElementById('byolForm');
+      form.addEventListener('submit', e => {
+        const anyCloud = ['useAws','useAzure','useGcp'].some(id => document.getElementById(id).checked);
+        if (!anyCloud) {
+          e.preventDefault();
+          alert('Please select at least one cloud Refine will monitor (AWS, Azure, or GCP).');
+        }
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
