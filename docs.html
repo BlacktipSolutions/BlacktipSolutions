@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Refine Documentation — Blacktip Solutions</title>
+  <meta name="description" content="Complete Refine documentation: architecture, deployment, per-cloud onboarding (AWS / Azure / GCP / GovCloud), user guide, pilot rollout playbook." />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="refine.css">
+</head>
+<body>
+  <header>
+    <div class="container navwrap">
+      <a href="index.html" class="logo" aria-label="Blacktip Solutions">
+        <img class="logo-img" src="blacktip-site-starter/assets/blacktip-logo-2.png" alt="Blacktip Solutions logo" />
+      </a>
+
+      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Toggle navigation">☰</button>
+
+      <nav id="siteNav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="refine.html">Refine</a></li>
+          <li><a href="docs.html" class="active">Docs</a></li>
+          <li><a class="cta" href="marketplace-license.html">Request license</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero hero-compact">
+    <div class="hero-background-animation"></div>
+    <div class="container headline">
+      <div class="kicker">Refine Documentation</div>
+      <h1 class="display accent">Everything you need to deploy + run Refine</h1>
+      <p class="subline">Architecture, per-cloud setup, security posture, pilot rollout, and daily-use reference. All current as of Refine v3.3.0. PDFs are bundled with every customer delivery — these copies are kept in sync.</p>
+    </div>
+  </main>
+
+  <section class="container docs-section">
+    <h2 class="section-title">Getting started</h2>
+    <p class="section-sub">Start here if you're new to Refine or just subscribed.</p>
+
+    <div class="docs-grid">
+      <a class="doc-card" href="blacktip-site-starter/assets/REFINE_PRODUCT_BRIEF.pdf" download>
+        <div class="doc-meta">PDF · ~30 pages</div>
+        <h3>Product Brief</h3>
+        <p>Capabilities, multi-cloud coverage, competitive positioning, FAQ. The single doc to read first.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/CUSTOMER_QUICKSTART.pdf" download>
+        <div class="doc-meta">PDF · End-to-end walkthrough</div>
+        <h3>Customer Quickstart</h3>
+        <p>Set up the Refine server on AWS, connect your first cloud account, learn the daily-use flow. ~60 min start to finish.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/SYSTEM_REQUIREMENTS.pdf" download>
+        <div class="doc-meta">PDF · Reference</div>
+        <h3>System Requirements</h3>
+        <p>What Refine needs to run: instance sizing by account count, supported AWS regions, disk + memory minimums, OS requirements.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="container docs-section">
+    <h2 class="section-title">Architecture &amp; security</h2>
+    <p class="section-sub">For your security team, architects, and reviewers.</p>
+
+    <div class="docs-grid">
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/ARCHITECTURE.pdf" download>
+        <div class="doc-meta">PDF · Single-page diagram + narrative</div>
+        <h3>Architecture (Marketplace)</h3>
+        <p>How Refine deploys in your AWS account, where data lives, what crosses the boundary (nothing — zero egress to Blacktip).</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/NETWORK_ARCHITECTURE.pdf" download>
+        <div class="doc-meta">PDF · Network topology</div>
+        <h3>Network Architecture</h3>
+        <p>Detailed network paths, security groups, NACLs, optional VPC endpoint configurations, and air-gap variants.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/IAM_PERMISSIONS.pdf" download>
+        <div class="doc-meta">PDF · IAM reference</div>
+        <h3>IAM Permissions</h3>
+        <p>Exact IAM policy text for every role Refine creates. Used by security reviewers to validate the read-only-by-design claim.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="container docs-section">
+    <h2 class="section-title">Deployment</h2>
+    <p class="section-sub">Pick the path that matches how you subscribed.</p>
+
+    <div class="docs-grid">
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/MARKETPLACE_DEPLOYMENT_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · AWS Marketplace BYOL</div>
+        <h3>Marketplace Deployment Guide</h3>
+        <p>For customers who subscribed via AWS Marketplace. Stack launch, license-request form, S3 license upload, first login.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/DIRECT_SALES_DEPLOYMENT_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · Direct-sales delivery ZIP</div>
+        <h3>Direct-Sales Deployment Guide</h3>
+        <p>For customers who received a delivery ZIP from Blacktip directly. EC2 sizing, setup wizard, PostgreSQL production option, HTTPS via ALB.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/AIR_GAPPED_SETUP_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · Air-gap deployments</div>
+        <h3>Air-Gapped Setup</h3>
+        <p>For GovCloud, FedRAMP, and classified-network deployments. Sneakernet-compatible delivery, offline Ed25519 license verification, zero internet dependency.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/GOVCLOUD_SETUP_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · GovCloud variant</div>
+        <h3>GovCloud Setup</h3>
+        <p>GovCloud-partition specifics. CloudFormation differences (Cost Explorer paths dropped), partition ARNs, FedRAMP inheritance.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="container docs-section">
+    <h2 class="section-title">Connect your cloud accounts</h2>
+    <p class="section-sub">One guide per cloud. Refine supports all three in a single deployment.</p>
+
+    <div class="docs-grid">
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/MARKETPLACE_DEPLOYMENT_GUIDE.pdf" download>
+        <div class="doc-meta">Part of Deployment Guide</div>
+        <h3>AWS account connection</h3>
+        <p>One-click CloudFormation per AWS account. Creates the per-account Lambda collector + S3 bucket. External-ID protected.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/AZURE_SETUP_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · Azure subscription onboarding</div>
+        <h3>Azure setup</h3>
+        <p>One-line <code>curl | bash</code> in Azure Cloud Shell. Creates Entra ID app, Reader role, Storage Account, and daily Cost Management Export. Supports Azure Public + US Government.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/GCP_SETUP_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · GCP project onboarding</div>
+        <h3>GCP setup</h3>
+        <p>Terraform module. Creates Service Account with viewer + BigQuery data-viewer roles, plus BigQuery billing export.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/LDAP_SETUP_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · Enterprise SSO</div>
+        <h3>LDAP / AD / Entra ID</h3>
+        <p>Wire Refine into your existing directory. RBAC mapping for ROOT / ADMIN / USER roles, plus per-account-group scoping.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="container docs-section">
+    <h2 class="section-title">Day-to-day operation</h2>
+    <p class="section-sub">Once Refine is running.</p>
+
+    <div class="docs-grid">
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/USER_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · Page-by-page reference</div>
+        <h3>User Guide</h3>
+        <p>Every page, every dashboard, every recommendation type. The complete reference for FinOps teams using Refine daily.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+
+      <a class="doc-card" href="blacktip-site-starter/assets/docs/PILOT_ROLLOUT_GUIDE.pdf" download>
+        <div class="doc-meta">PDF · 90-day playbook</div>
+        <h3>Pilot Rollout Playbook</h3>
+        <p>How to run a successful 90-day Refine pilot: stakeholder mapping, week-by-week milestones, value-realization checkpoints, executive presentation.</p>
+        <span class="doc-link">Download →</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="container contact-section">
+    <div class="contact-card">
+      <h2 class="contact-title">Can't find what you need?</h2>
+      <p class="contact-description">Every Refine delivery ships with the same docs bundled in the ZIP. If you have a question that isn't covered here, or you want the latest version delivered with your release, email <a class="contact-email" href="mailto:support@blacktip-ops.com">support@blacktip-ops.com</a>. Typical response within 1 business day.</p>
+      <div class="contact-buttons">
+        <a class="cta email-cta" href="mailto:support@blacktip-ops.com">Email support</a>
+        <a class="cta download-cta" href="refine.html">Back to Refine overview</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <div>© <span id="year"></span> Blacktip Solutions</div>
+      <div style="opacity:.75">UEI: SU55FSWCWK98</div>
+      <div style="opacity:.75">CAGE Code: 14QNO</div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
