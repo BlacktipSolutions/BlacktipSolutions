@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Refine — Multi-Cloud Cost Intelligence | Blacktip Solutions</title>
-  <meta name="description" content="Refine is a self-hosted multi-cloud cost-intelligence platform for AWS, Azure, and GCP. Read-only, customer-owned data, flat per-account license. Available on AWS Marketplace." />
+  <meta name="description" content="Refine is a self-hosted multi-cloud cost-intelligence platform for AWS, Azure, and GCP. Read-only, customer-owned data, annual tiered pricing. Now available on AWS Marketplace." />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="index.css">
@@ -122,73 +122,50 @@
       <div class="mp-text">
         <div class="kicker">AWS Marketplace</div>
         <h2 class="section-title">Subscribe through AWS Marketplace</h2>
-        <p>Refine is a <strong>CloudFormation product</strong> on AWS Marketplace. One-click subscribe, launch the stack in your account, and Refine pulls itself from AWS Public ECR. We deliver your Ed25519-signed license to your CFN-provisioned S3 bucket; a license-watcher daemon installs it within 60 seconds and Refine boots.</p>
+        <p>Refine is a <strong>contract product</strong> on AWS Marketplace. Subscribe to the tier that matches your cloud spend, launch the CloudFormation stack in your own account, and Refine pulls itself from AWS Public ECR and verifies your Marketplace entitlement automatically — no license file, no forms, no manual steps.</p>
         <ul class="mp-bullets">
-          <li><strong>Free trial:</strong> 30 days, full functionality</li>
-          <li><strong>Pricing:</strong> Bring Your Own License (BYOL) — flat per monitored cloud account</li>
+          <li><strong>Pricing:</strong> annual contract by Spend Analyzed — Starter&nbsp;$7,500 · Core&nbsp;$20,000 · Growth&nbsp;$50,000 · Scale&nbsp;$125,000 · Enterprise custom</li>
+          <li><strong>Fulfillment:</strong> automatic via AWS License Manager — subscribe, launch, done</li>
           <li><strong>EULA:</strong> AWS Standard Contract for Marketplace (SCMP)</li>
-          <li><strong>Channels:</strong> Commercial AWS Marketplace + GovCloud (Phase&nbsp;2)</li>
           <li><strong>Refund:</strong> 30-day money-back guarantee on the first annual subscription</li>
         </ul>
         <div class="mp-cta-row">
-          <span class="cta cta-coming">Subscribe on AWS Marketplace — coming soon</span>
-          <a class="cta cta-secondary" href="marketplace-license.html">Already subscribed? Request license</a>
+          <a class="cta" href="https://aws.amazon.com/marketplace/pp?sku=3o0r05v1kvpwtpr1wbnuaos7h" target="_blank" rel="noopener">Subscribe on AWS Marketplace →</a>
           <a class="cta cta-secondary" href="blacktip-site-starter/assets/REFINE_PRODUCT_BRIEF.pdf" download>Download product brief (PDF)</a>
         </div>
-        <p class="mp-fineprint">Live link to the AWS Marketplace listing will be published here once AWS completes review. In the meantime, email <a href="mailto:corporate@blacktip-ops.com">corporate@blacktip-ops.com</a> for an early-access conversation.</p>
+        <p class="mp-fineprint">Buying direct, for GovCloud/air-gapped, or via Private Offer (BYOL)? Email <a href="mailto:corporate@blacktip-ops.com">corporate@blacktip-ops.com</a>, or <a href="marketplace-license.html">request your license</a> if you already hold a BYOL subscription.</p>
       </div>
     </div>
   </section>
 
   <section class="container how-section">
     <h2 class="section-title">How it works</h2>
-    <p class="section-sub">From subscribe to first dashboard in 10–30 minutes.</p>
+    <p class="section-sub">From subscribe to first dashboard in about 10 minutes.</p>
 
     <ol class="step-list">
       <li>
         <div class="step-num">1</div>
         <div class="step-body">
           <h3>Subscribe on AWS Marketplace</h3>
-          <p>Accept the Standard Contract for Marketplace (SCMP). Subscription is free — your AWS bill only reflects the EC2/EBS resources the stack provisions in your own account.</p>
+          <p>Pick the tier that matches your Spend Analyzed and accept the annual contract under the Standard Contract for Marketplace (SCMP). AWS bills the tier; your AWS account is also charged for the small EC2/EBS resources the stack provisions.</p>
         </div>
       </li>
       <li>
         <div class="step-num">2</div>
         <div class="step-body">
           <h3>Launch the CloudFormation stack</h3>
-          <p>One-click from the Marketplace listing. The stack provisions an EC2 host, an IAM role scoped to S3 + SSM, an S3 license-delivery bucket, and (optionally) an HTTPS Application Load Balancer with your ACM certificate.</p>
+          <p>One-click from the Marketplace listing. The stack provisions an EC2 host and a least-privilege IAM role in your own account, and (optionally) an HTTPS Application Load Balancer. Set an admin email and password — that's your login.</p>
         </div>
       </li>
       <li>
         <div class="step-num">3</div>
         <div class="step-body">
-          <h3>EC2 pulls Refine from AWS Public ECR</h3>
-          <p>On first boot the EC2 pulls <code>public.ecr.aws/blacktip/refine:vX.Y.Z</code> and starts in a waiting-for-license loop. No waiting on Blacktip.</p>
+          <h3>Refine verifies your entitlement automatically</h3>
+          <p>On first boot the EC2 pulls Refine from AWS Public ECR and confirms your AWS Marketplace contract via AWS License Manager — no license file, no form, no manual step. Open the RefineUrl from the stack Outputs and log in. Typically about 10 minutes end-to-end.</p>
         </div>
       </li>
       <li>
         <div class="step-num">4</div>
-        <div class="step-body">
-          <h3>Submit your license request</h3>
-          <p>Fill in our <a href="marketplace-license.html">one-page license-request form</a> with your CFN Outputs and the cloud accounts Refine will monitor. Blacktip emails you a ~500-byte Ed25519-signed license file within one business hour.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-num">5</div>
-        <div class="step-body">
-          <h3>Drop the license into your bucket</h3>
-          <p>One <code>aws s3 cp refine.license s3://&lt;your-DeliveryBucketName&gt;/</code> from any shell with access to your AWS account — Commercial or GovCloud, works the same since the upload runs from your environment. ~5 seconds.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-num">6</div>
-        <div class="step-body">
-          <h3>License-watcher installs it automatically</h3>
-          <p>A watcher daemon on the EC2 polls the bucket every 60 seconds, atomic-swaps the license in, and restarts the container. Refine validates the license offline against an Ed25519 public key baked into the image, and the UI is live ~30 seconds later.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-num">6</div>
         <div class="step-body">
           <h3>Add your cloud accounts</h3>
           <p>AWS — one-click CloudFormation per account. Azure — one-line <code>curl | bash</code> in Cloud Shell. GCP — a Terraform module. First recommendations appear within minutes of the first sync.</p>
