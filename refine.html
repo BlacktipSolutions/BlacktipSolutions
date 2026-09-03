@@ -63,8 +63,8 @@
           <div class="stat-label">AWS services<br/>analyzed end-to-end</div>
         </div>
         <div class="stat">
-          <div class="stat-num">12–25%</div>
-          <div class="stat-label">Typical savings<br/>in first 90 days</div>
+          <div class="stat-num">Read-only</div>
+          <div class="stat-label">by design — Refine never<br/>writes to your cloud</div>
         </div>
         <div class="stat">
           <div class="stat-num">0</div>
@@ -115,6 +115,52 @@
         <p>LDAP / Active Directory / Entra ID SSO with ROOT / ADMIN / USER roles and per-account-group scoping. Every recommendation lifecycle event is logged with the user who took it.</p>
       </div>
     </div>
+  </section>
+
+  <!-- Two products: Free vs Paid -->
+  <section id="plans" class="container">
+    <h2 class="section-title">Two ways to run Refine</h2>
+    <p class="section-sub">Same self-hosted, read-only, customer-owned-data architecture — choose by your cloud spend.</p>
+    <div class="plans-grid">
+      <div class="marketplace-card">
+        <div class="mp-text">
+          <div class="kicker">Free</div>
+          <h3 class="section-title plan-name">Blacktip Refine Free</h3>
+          <p><strong>$0</strong> — for up to <strong>$1,000/month</strong> of analyzed cloud spend.</p>
+          <ul class="mp-bullets">
+            <li>Full multi-cloud cost intelligence (AWS, Azure, GCP) and every recommendation — the same engine as the paid tiers.</li>
+            <li>Self-hosted in your own account; your cost and infrastructure data never leaves it.</li>
+            <li><strong>In exchange:</strong> an anonymous, aggregated monthly summary — total spend and savings only, never raw cost data, resources, or personal information.</li>
+            <li>Above $1,000/month of analyzed spend the free plan pauses and prompts you to upgrade to a paid, telemetry-free tier.</li>
+          </ul>
+          <div class="mp-cta-row">
+            <a class="cta" href="https://aws.amazon.com/marketplace/pp?sku=7lygz0jdk2ru1kzzkpsexqaml" target="_blank" rel="noopener">Get Refine Free →</a>
+          </div>
+        </div>
+      </div>
+      <div class="marketplace-card">
+        <div class="mp-text">
+          <div class="kicker">Paid — zero telemetry</div>
+          <h3 class="section-title plan-name">Blacktip Refine</h3>
+          <p><strong>Annual contract</strong>, priced by Spend Analyzed.</p>
+          <ul class="mp-bullets">
+            <li><strong>Strictly telemetry-free</strong> — nothing about your environment is ever sent to Blacktip.</li>
+            <li>Scales with your spend: Starter&nbsp;$7,500 · Core&nbsp;$20,000 · Growth&nbsp;$50,000 · Scale&nbsp;$125,000 · Enterprise custom.</li>
+            <li>Automatic fulfillment via AWS License Manager; 30-day money-back guarantee on the first annual subscription.</li>
+            <li>Private Offers, volume pricing, and GovCloud / air-gapped (BYOL) deployments available.</li>
+          </ul>
+          <div class="mp-cta-row">
+            <a class="cta" href="https://aws.amazon.com/marketplace/pp?sku=3o0r05v1kvpwtpr1wbnuaos7h" target="_blank" rel="noopener">Subscribe on AWS Marketplace →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="section-sub plans-diff"><strong>The difference:</strong> the Free tier is funded by an anonymous, aggregated usage summary and fits up to $1,000/month of analyzed spend; every paid tier sends <strong>zero</strong> telemetry and scales to enterprise spend. The architecture, security model, and recommendations are identical across both.</p>
+    <style>
+      .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 8px; align-items: start; }
+      .plan-name { font-size: 1.4rem; margin: 6px 0 6px; }
+      .plans-diff { margin-top: 18px; }
+    </style>
   </section>
 
   <section id="marketplace" class="container marketplace-section">
