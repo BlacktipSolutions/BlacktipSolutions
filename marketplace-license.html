@@ -46,7 +46,7 @@
         <ol class="explainer-list">
           <li><strong>You submit this form</strong> with your CFN Outputs and the IDs of every cloud account Refine will monitor.</li>
           <li><strong>Blacktip generates your Ed25519-signed license</strong> bound to your CFN stack's installation ID and the cloud accounts you listed.</li>
-          <li><strong>We email you the ~500-byte <code>refine.license</code> file</strong> and a one-line <code>aws s3 cp</code> command from <code>AMelcher@blacktip-ops.com</code>.</li>
+          <li><strong>We email you the ~500-byte <code>refine.license</code> file</strong> and a one-line <code>aws s3 cp</code> command from <code>support@blacktip-ops.com</code>.</li>
           <li><strong>You drop the file into your delivery bucket</strong> with the one-line CLI command (~5 seconds). Works the same on Commercial AWS and GovCloud since the upload happens from your own account.</li>
           <li><strong>The license-watcher on your EC2 picks it up</strong> within 60 seconds and restarts the container.</li>
           <li><strong>Refine's UI is live</strong> ~30 seconds after that — paste the activation code from the email and you're in.</li>
