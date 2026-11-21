@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Book a 30-minute live demo of Blacktip Refine, the self-hosted cost optimization platform for AWS, Azure and GCP that never leaves your cloud. Pick a time on our calendar." />
+  <meta name="description" content="Book a 30-minute live demo of Blacktip Refine, the self-hosted cost optimization platform for AWS, Azure and Google Cloud that never leaves your cloud. Pick a time on our calendar." />
   <title>Book a Demo | Blacktip Solutions</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,6 +111,33 @@
     }
     .btn-secondary:hover { border-color: var(--teal); color: var(--teal-dim); }
 
+    /* VIDEO */
+    .video-heading {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 0.5rem;
+    }
+    .video-sub {
+      color: #4a6670;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+    .video-frame {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid #dde6e8;
+      background: #000;
+    }
+    .video-frame iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
     /* BOOKING */
     section { padding: 3rem 2rem 4rem; }
     .container { max-width: 1040px; margin: 0 auto; }
@@ -194,12 +221,31 @@
     <p class="subhead">Pick a time that works for you. We walk through Refine running inside an AWS account, show how recommendations and commitment sizing work, and answer questions about your environment, including GovCloud and air-gapped deployments.</p>
   </section>
 
+  <!-- VIDEO -->
+  <section id="video">
+    <div class="container">
+      <h2 class="video-heading">See how it works</h2>
+      <p class="video-sub">A 4-minute walkthrough of Refine running on a live multi-cloud account.</p>
+      <div class="video-frame">
+        <!-- Replace LOOM_VIDEO_ID with the actual Loom share ID -->
+        <iframe
+          src="https://www.loom.com/embed/LOOM_VIDEO_ID"
+          title="Blacktip Refine demo video"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
   <!-- BOOKING -->
   <section id="book">
     <div class="container">
+      <h2 class="video-heading">Book a live demo</h2>
       <div class="expect">
         <div><strong>Live walkthrough</strong>Dashboard, recommendations, Savings Plan sizing and the audit trail, on real data.</div>
-        <div><strong>Your questions</strong>Pricing by spend tier, Marketplace vs direct licensing, Azure and GCP coverage.</div>
+        <div><strong>Your questions</strong>Pricing by spend tier, Marketplace vs direct licensing, Azure and Google Cloud coverage.</div>
         <div><strong>Deployment fit</strong>Commercial, GovCloud, IL4/IL5 and air-gapped: what the install looks like in your account.</div>
       </div>
 

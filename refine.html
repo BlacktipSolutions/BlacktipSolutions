@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Refine — Multi-Cloud Cost Intelligence | Blacktip Solutions</title>
-  <meta name="description" content="Refine is a self-hosted multi-cloud cost-intelligence platform for AWS, Azure, and GCP. Read-only, customer-owned data, annual tiered pricing. Now available on AWS Marketplace." />
+  <meta name="description" content="Refine is a self-hosted multi-cloud cost-intelligence platform for AWS, Azure, and Google Cloud. Read-only, customer-owned data, annual tiered pricing. Now available on AWS Marketplace." />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="index.css">
@@ -45,8 +45,8 @@
     <div class="intro-grid">
       <div class="intro-text">
         <h2 class="section-title">What Refine does</h2>
-        <p>Refine is a self-hosted cost-intelligence platform that connects read-only to AWS, Azure, and GCP and ranks every cost-optimization opportunity across all three clouds in a single prioritized list — with dollar impact, executable CLI commands, and a Suggested → Accepted → Implemented → Verified audit trail.</p>
-        <p>It runs as a Docker container inside <strong>your own</strong> AWS account. Per-cloud collectors write summary data to buckets you own. <strong>No data ever leaves your environment.</strong></p>
+        <p>Refine is a self-hosted cost-intelligence platform that connects read-only to AWS, Azure, and Google Cloud and ranks every cost-optimization opportunity across all three clouds in a single prioritized list — with dollar impact, executable CLI commands, and a Suggested → Accepted → Implemented → Verified audit trail.</p>
+        <p>It runs as a Docker container inside <strong>your own</strong> AWS account. Per-cloud collectors write summary data to buckets you own. <strong>No customer data ever leaves your environment.</strong></p>
         <div class="badge-row">
           <span class="badge">Read-only by design</span>
           <span class="badge">Air-gap-ready</span>
@@ -57,7 +57,7 @@
       <div class="intro-stats">
         <div class="stat">
           <div class="stat-num">3</div>
-          <div class="stat-label">Clouds<br/>AWS · Azure · GCP</div>
+          <div class="stat-label">Clouds<br/>AWS · Azure · Google Cloud</div>
         </div>
         <div class="stat">
           <div class="stat-num">14+</div>
@@ -69,7 +69,7 @@
         </div>
         <div class="stat">
           <div class="stat-num">0</div>
-          <div class="stat-label">Bytes of data<br/>sent to Blacktip</div>
+          <div class="stat-label">Bytes of customer data<br/>sent to Blacktip</div>
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@
       <div class="cap-card">
         <div class="cap-icon">📊</div>
         <h3>Commitment optimization</h3>
-        <p>AWS Savings Plans + Reserved Instances, Azure Reservations + Savings Plan for Compute, and GCP Committed Use Discounts — with utilization tracking and guardrails that block recommendations which would underwater an active commitment. The Savings Report shows what your AWS Savings Plans and Reserved Instances actually saved, taken from the credits AWS applied to your bill, alongside utilization and coverage.</p>
+        <p>AWS Savings Plans + Reserved Instances, Azure Reservations + Savings Plan for Compute, and Google Cloud Committed Use Discounts — with utilization tracking and guardrails that block recommendations which would underwater an active commitment. The Savings Report shows what your AWS Savings Plans and Reserved Instances actually saved, taken from the credits AWS applied to your bill, alongside utilization and coverage.</p>
       </div>
 
       <div class="cap-card">
@@ -129,8 +129,8 @@
           <h3 class="section-title plan-name">Blacktip Refine Free</h3>
           <p><strong>$0</strong> — for up to <strong>$1,000/month</strong> of analyzed cloud spend.</p>
           <ul class="mp-bullets">
-            <li>Full multi-cloud cost intelligence (AWS, Azure, GCP) and every recommendation — the same engine as the paid tiers.</li>
-            <li>Self-hosted in your own account; your cost and infrastructure data never leaves it.</li>
+            <li>Full multi-cloud cost intelligence (AWS, Azure, Google Cloud) and every recommendation — the same engine as the paid tiers.</li>
+            <li>Self-hosted in your own account; your infrastructure data never leaves it. An optional, anonymous monthly summary is off by default.</li>
             <li><strong>In exchange:</strong> an anonymous, aggregated monthly summary — total spend and savings only, never raw cost data, resources, or personal information.</li>
             <li>Above $1,000/month of analyzed spend the free plan locks (your data is kept) and prompts you to subscribe to a paid, telemetry-free tier &mdash; a separate Marketplace product, so you launch its stack rather than upgrade in place.</li>
           </ul>
@@ -215,7 +215,7 @@
         <div class="step-num">4</div>
         <div class="step-body">
           <h3>Add your cloud accounts</h3>
-          <p>AWS — one-click CloudFormation per account. Azure — one-line <code>curl | bash</code> in Cloud Shell. GCP — a Terraform module. First recommendations appear within minutes of the first sync.</p>
+          <p>AWS — one-click CloudFormation per account. Azure — one-line <code>curl | bash</code> in Cloud Shell. Google Cloud — a Terraform module. First recommendations appear within minutes of the first sync.</p>
         </div>
       </li>
     </ol>
@@ -230,7 +230,7 @@
       </div>
       <div class="sec-item">
         <h4>Customer-owned data path</h4>
-        <p>Cost and inventory summaries land in S3 / Blob / GCS buckets <em>you</em> own. Refine reads from those buckets. There is no Blacktip-side store and no network path back to Blacktip.</p>
+        <p>Cost and inventory summaries land in S3 / Blob / GCS buckets <em>you</em> own. Refine reads from those buckets. There is no Blacktip-side store. Paid tiers have no network path back to Blacktip.</p>
       </div>
       <div class="sec-item">
         <h4>Ed25519 offline license</h4>
